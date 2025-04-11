@@ -1,0 +1,90 @@
+# Refer to golangci-lint's example config file for more options and information:
+# https://github.com/golangci/golangci-lint/blob/master/.golangci.example.yml
+
+run:
+  timeout: 5m
+  modules-download-mode: readonly
+
+linters:
+  enable:
+    - errcheck
+    - goimports
+    - revive
+    - govet
+    - staticcheck
+    - gofmt
+    - bodyclose
+    - dupl
+    - forbidigo
+    - gocognit
+    - gocritic
+    - gosec
+    - nakedret
+    - nolintlint
+    - unconvert
+    - unparam
+    - gochecknoinits
+    - whitespace
+    - unused
+
+linters-settings:
+  gofmt:
+    simplify: false
+    rewrite-rules:
+      #- pattern: 'interface{}'
+      #replacement: 'any'
+      - pattern: 'a[b:len(a)]'
+        replacement: 'a[b:]'
+  revive:
+    enable-all-rules: true
+    rules: # https://github.com/mgechev/revive/blob/master/RULES_DESCRIPTIONS.md
+      # Disabled
+      - name: package-comments
+        disabled: true
+      # https://github.com/mgechev/revive/blob/master/RULES_DESCRIPTIONS.md#file-header
+      - name: file-header
+        disabled: true
+
+      # Enabled - Esses precisaram de configurações, habilitar apenas não foi o suficiente
+      # https://github.com/mgechev/revive/blob/master/RULES_DESCRIPTIONS.md#argument-limit
+      - name: argument-limit
+        disabled: false
+        arguments: [8]
+      # https://github.com/mgechev/revive/blob/master/RULES_DESCRIPTIONS.md#function-result-limit
+      - name: function-result-limit
+        disabled: false
+        arguments: [5]
+      # https://github.com/mgechev/revive/blob/master/RULES_DESCRIPTIONS.md#banned-characters
+      - name: banned-characters
+        disabled: false
+        arguments: ["Ω", "Σ", "σ"]
+      # https://github.com/mgechev/revive/blob/master/RULES_DESCRIPTIONS.md#cyclomatic
+      - name: cyclomatic
+        disabled: false
+        arguments: [7]
+      # https://github.com/mgechev/revive/blob/master/RULES_DESCRIPTIONS.md#cognitive-complexity
+      - name: cognitive-complexity
+        disabled: false
+        arguments: [7]
+      # https://github.com/mgechev/revive/blob/master/RULES_DESCRIPTIONS.md#line-length-limit
+      - name: line-length-limit
+        disabled: false
+        arguments: [140]
+      # https://github.com/mgechev/revive/blob/master/RULES_DESCRIPTIONS.md#max-public-structs
+      - name: max-public-structs
+        disabled: false
+        arguments: [12]
+      # https://github.com/mgechev/revive/blob/master/RULES_DESCRIPTIONS.md#function-length
+      - name: function-length
+        disabled: false
+        arguments: [30, 0]
+      # https://github.com/mgechev/revive/blob/master/RULES_DESCRIPTIONS.md#add-constant
+      - name: add-constant
+        disabled: true
+
+issues:
+  exclude-use-default: false
+  max-issues-per-linter: 0
+  max-same-issues: 0
+  exclude:
+    - "exported (.+)"
