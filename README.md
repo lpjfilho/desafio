@@ -19,6 +19,8 @@ A empresa ajuda os parceiros a receberem dos consumidores suas dívidas e cobra 
   - O sistema deve calcular a comissão de acordo com a tabela de preço configurada.
 - **Base de Dados de Dívidas Pagas**: 
   - O sistema deve acessar um array de dívidas pagas para calcular a comissão.
+- **Endpoint**:
+  - Deve receber um id do parceiro e retornar os valores cálculados. 
 
 ## Regras de Negócio:
 - O cálculo da comissão é baseado na tabela associada ao parceiro.
